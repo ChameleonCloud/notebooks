@@ -1,0 +1,50 @@
+# This describes what is deployed by this template.
+description: Basic demonstration of Heat
+
+# This defines the minimum Heat version required by this template.
+heat_template_version: 2015-10-15
+
+# The parameters section gathers configuration from the user.
+parameters:
+  key_name:
+    type: string
+    description: Name of a KeyPair to enable SSH access to the instance
+    default: default
+    constraints:
+    - custom_constraint: nova.keypair
+  reservation_id:
+    type: string
+    description: ID of the Blazar reservation to use for launching instances.
+    constraints:
+    - custom_constraint: blazar.reservation
+
+# The resources section defines what OpenStack resources are to be deployed and
+# how they should be configured.
+resources:
+  # Define a single instance
+  my_instance:
+    type: OS::Nova::Server
+    properties:
+      flavor: baremetal
+      image: CC-CentOS7
+      key_name: { get_param: key_name }
+      networks:
+      - network: sharednet1
+      scheduler_hints: { reservation: { get_param: reservation_id } }
+      
+  my_floating_ip:
+    type: OS::Nova::FloatingIP
+    properties:
+      pool: public
+
+  my_floating_ip_association:
+    type: OS::Nova::FloatingIPAssociation
+    properties:
+      floating_ip: { get_resource: my_floating_ip }
+      server_id: { get_resource: my_instance }
+
+# Output some useful information about what was created
+outputs:
+  public_ip:
+    description: Public IP address of the server
+    value: { get_attr: [my_floating_ip, ip] }

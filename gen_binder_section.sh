@@ -9,14 +9,14 @@ binder_badge() {
 
 gen_section() {
   local section="$1"
-  local out="\ "
+  local out="\ \n"
 
   echo "Generating $section section..."
   for file in $(find . -type f -path "./$section/*" -name '*.ipynb' ! -name 'TutorialTemplate.ipynb'); do
     echo "  $file"
     name="$(basename $file)"
     binder_link="meh"
-    out="$out\n**[${name%.ipynb}]($file))**: $(binder_badge $file)\n"
+    out="$out- $(binder_badge $file) **[${name%.ipynb}]($file)**\n"
   done
 
   local lead="^<!-- BEGIN BINDERS $section -->\$"

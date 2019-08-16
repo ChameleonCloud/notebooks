@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
-binder_base="https://mybinder.org/v2/gh/ChameleonCloud/notebooks/master"
+launch_base="https://jupyter.chameleoncloud.org/import?source=git&src_path=chameleoncloud/notebooks&file_path="
 
-binder_badge() {
+launch_badge() {
   local filepath="$(sed -e 's/^\.\///' -e 's/\//%2F/g' <<<"$1")"
-  echo "[![Binder](https://mybinder.org/badge_logo.svg)]($binder_base?filepath=$filepath)"
+  echo "[![Launch on Chameleon](https://img.shields.io/badge/launch-chameleon-brightgreen)]($launch_base$filepath)"
 }
 
 gen_section() {
@@ -15,12 +15,11 @@ gen_section() {
   for file in $(find . -type f -path "./$section/*" -name '*.ipynb' ! -name 'TutorialTemplate.ipynb'); do
     echo "  $file"
     name="$(basename $file)"
-    binder_link="meh"
-    out="$out- $(binder_badge $file) **[${name%.ipynb}]($file)**\n"
+    out="$out- $(launch_badge $file) **[${name%.ipynb}]($file)**\n"
   done
 
-  local lead="^<!-- BEGIN BINDERS $section -->\$"
-  local tail="^<!-- END BINDERS $section -->\$"
+  local lead="^<!-- BEGIN LAUNCHERS $section -->\$"
+  local tail="^<!-- END LAUNCHERS $section -->\$"
   gsed -i.bak -e "/$lead/,/$tail/{ /$lead/{p; a $out
 }; /$tail/p; d; }" README.md && rm README.md.bak
 }

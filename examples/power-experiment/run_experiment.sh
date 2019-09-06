@@ -3,7 +3,7 @@
 task_time_s="${1:-30}"
 sample_rate_s="${2:-0.5}"
 interval_time_s="${3:-5}"
-num_cores=$(grep )
+num_cores=$(nproc)
 
 echo "Task time: ${task_time_s}s"
 echo "Sample rate: ${sample_rate_s}s"
@@ -16,7 +16,7 @@ rm -rf ./out && mkdir ./out
 prefix="./out/run-$(date +%Y%m%d.%H%M.%S)"
 
 run_task() {
-  timeout "$task_time_s" etrace2 -s "$sample_rate_s" "$@"
+  timeout "$task_time_s" etrace2 -i "$sample_rate_s" "$@"
 }
 
 echo
@@ -44,5 +44,6 @@ echo
 echo "Creating archive of results ...",
 
 tarball="$prefix.tar.gz"
-tar -czf "$tarball" "$prefix-*.out" && cp "$tarball" ./out/latest.tar.gz
-echo "Finished. Tarball located at $tarball (and ./out/latest.tar.gz)"
+tar -czf "$tarball" $prefix-*.out && cp "$tarball" ./out/latest.tar.gz \
+ && echo "Finished. Tarball located at $tarball (and ./out/latest.tar.gz)" \
+ || echo "Failed to write tarball to $tarball!"

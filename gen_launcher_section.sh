@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-launch_base="https://jupyter.chameleoncloud.org/import?source=git&src_path=chameleoncloud/notebooks&file_path="
+launch_base="https://jupyter.chameleoncloud.org/import?source=github&src_path=chameleoncloud/notebooks&file_path="
 
 launch_badge() {
   local filepath="$(sed -e 's/^\.\///' -e 's/\//%2F/g' <<<"$1")"

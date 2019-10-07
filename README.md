@@ -24,6 +24,7 @@ Examples of complex experimental setup configurations. Also includes an explorat
 
 <!-- BEGIN LAUNCHERS examples -->
  
+- [![Launch on Chameleon](https://img.shields.io/badge/launch-chameleon-brightgreen)](https://jupyter.chameleoncloud.org/import?source=github&src_path=chameleoncloud/notebooks&file_path=examples%2Fconfiguration%2FConfiguringCPUFrequency.ipynb) **[ConfiguringCPUFrequency](./examples/configuration/ConfiguringCPUFrequency.ipynb)**
 - [![Launch on Chameleon](https://img.shields.io/badge/launch-chameleon-brightgreen)](https://jupyter.chameleoncloud.org/import?source=github&src_path=chameleoncloud/notebooks&file_path=examples%2Fconfiguration%2FUsingSSHToConfigureNameResolution.ipynb) **[UsingSSHToConfigureNameResolution](./examples/configuration/UsingSSHToConfigureNameResolution.ipynb)**
 - [![Launch on Chameleon](https://img.shields.io/badge/launch-chameleon-brightgreen)](https://jupyter.chameleoncloud.org/import?source=github&src_path=chameleoncloud/notebooks&file_path=examples%2Fnetworking%2FExoGENIStitch.ipynb) **[ExoGENIStitch](./examples/networking/ExoGENIStitch.ipynb)**
 - [![Launch on Chameleon](https://img.shields.io/badge/launch-chameleon-brightgreen)](https://jupyter.chameleoncloud.org/import?source=github&src_path=chameleoncloud/notebooks&file_path=examples%2Fpower-experiment%2FRunExperiment.ipynb) **[RunExperiment](./examples/power-experiment/RunExperiment.ipynb)**
